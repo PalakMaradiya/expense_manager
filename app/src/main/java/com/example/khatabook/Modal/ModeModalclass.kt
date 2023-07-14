@@ -1,4 +1,4 @@
-package com.example.khatabook
+package com.example.khatabook.Modal
 
-class ModeModalclass {
+class ModeModalclass(var name: String, var id: String) {
 }

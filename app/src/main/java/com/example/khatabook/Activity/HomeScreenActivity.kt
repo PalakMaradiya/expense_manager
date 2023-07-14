@@ -1,5 +1,4 @@
 package com.example.khatabook.Activity
-
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -78,6 +77,15 @@ class HomeScreenActivity : AppCompatActivity() {
             val i = Intent(this@HomeScreenActivity, IncomeActivity::class.java)
             startActivity(i)
         }
+
+       binding.cardviewAddexpenses.setOnClickListener {
+
+           val i = Intent(this@HomeScreenActivity,ExpenseActivity::class.java)
+           startActivity(i)
+       }
+
+
+
 
     }
 }

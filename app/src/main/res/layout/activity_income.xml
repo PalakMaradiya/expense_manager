@@ -33,7 +33,7 @@
 
 
         <ImageView
-            android:id="@+id/imgCheck"
+            android:id="@+id/imgDone"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_25sdp"
             android:layout_marginLeft="@dimen/_10sdp"
@@ -92,9 +92,13 @@
 
 
                         <EditText
+                            android:id="@+id/edtAmount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Amount" />
+                            android:backgroundTint="@color/black"
+                            android:hint="Amount"
+                            android:inputType="number"
+                            android:maxLines="10" />
 
 
                     </LinearLayout>
@@ -129,6 +133,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/txtCategories"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Category"
@@ -274,6 +279,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/txtMode"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Mode"
@@ -294,6 +300,7 @@
 
 
                             <Spinner
+                                android:id="@+id/spinnerMode"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
 
@@ -333,9 +340,10 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/txtNote"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Mode"
+                            android:text="Note"
                             android:textColor="@color/sky"
                             android:textSize="@dimen/_15ssp"
                             android:textStyle="bold" />
@@ -343,7 +351,10 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Category" />
+                            android:backgroundTint="@color/black"
+                            android:hint="Category"
+                            android:inputType="text"
+                            android:maxLines="1" />
 
 
                     </LinearLayout>

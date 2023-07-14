@@ -23,7 +23,7 @@ class PaymentModeActivity : AppCompatActivity() {
     private fun initview() {
 
 
-        var database = DatabaseHelper(this, "ModeTable", null, 1)
+        var database = DatabaseHelper(this, "Database.db", null, 1)
         binding.btnApply.setOnClickListener {
 
         }

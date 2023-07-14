@@ -15,8 +15,9 @@
     </style>
 
 
-    <style name="DatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorAccent">@color/sky</item> <!-- Change this to your desired color -->
-    </style>
+<!--    for change date colour -->
+    <style name="CustomDatePickerDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
+        <item name="colorAccent">@color/sky</item> <!-- Customize the colorAccent to your desired color -->
+        </style>
 
 </resources>
