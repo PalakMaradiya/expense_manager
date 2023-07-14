@@ -3,12 +3,16 @@ package com.example.khatabook.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.widget.Spinner
+import android.view.View
+import android.widget.AdapterView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.khatabook.Adapter.CatAdapter
+import com.example.khatabook.Adapter.ModeAdapter
 import com.example.khatabook.Class.DatabaseHelper
 import com.example.khatabook.Modal.ModalClass
+import com.example.khatabook.Modal.ModeModalclass
 import com.example.khatabook.R
 import com.example.khatabook.databinding.ActivityIncomeBinding
 import java.text.SimpleDateFormat
@@ -17,20 +21,24 @@ import java.util.*
 class IncomeActivity : AppCompatActivity() {
     lateinit var binding: ActivityIncomeBinding
     var Categorylist = ArrayList<ModalClass>()
-    lateinit var SpinnerCategory: Spinner
+    var Modelist = ArrayList<ModeModalclass>()
     lateinit var database: DatabaseHelper
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityIncomeBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        database = DatabaseHelper(this, "CategoryTable.db", null, 1)
+        database = DatabaseHelper(this, "Database.db", null, 1)
 
         initview()
     }
 
+
     private fun initview() {
 
+
+//        for calander view
 
         val myCalendar = Calendar.getInstance()
         val datapicker = DatePickerDialog.OnDateSetListener { view, year, month, dayofmonth ->
@@ -41,6 +49,8 @@ class IncomeActivity : AppCompatActivity() {
             updateLabal(myCalendar)
 
         }
+
+
         binding.txtDate.setOnClickListener {
 
             DatePickerDialog(
@@ -50,6 +60,7 @@ class IncomeActivity : AppCompatActivity() {
         }
 
 
+//for time picker
         binding.txtTime.setOnClickListener {
 
             val calendar = Calendar.getInstance()
@@ -74,28 +85,110 @@ class IncomeActivity : AppCompatActivity() {
 
         }
 
+
+        Categorylist = database.DisplayCategory()
+
+
+        var adapter = CatAdapter(this, Categorylist)
+        binding.SpinnerCategory.adapter = adapter
 //
-//        binding.SpinnerCategory.setOnClickListener {
-//            Categorylist = database.DisplayCategory()
+//        binding.SpinnerCategory.onItemSelectedListener = object  : AdapterView.OnItemSelectedListener{
+//            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+//                Toast.makeText(applicationContext, Categorylist.get(p2)"", Toast.LENGTH_SHORT).show()
+//            }
+//
+//            override fun onNothingSelected(p0: AdapterView<*>?) {
+//                Toast.makeText(this, "Select any Category", Toast.LENGTH_SHORT).show()
+//            }
+//
 //        }
 
+
+
+        Modelist = database.DisplayMode()
+        var Madapter = ModeAdapter(this, Modelist)
+        binding.spinnerMode.adapter = Madapter
+
+
+
+
+        binding.imgDone.setOnClickListener {
+            val amt = binding.edtAmount.text.toString()
+            val category = binding.txtCategories.text.toString()
+            val date = binding.txtDate.text.toString()
+            val mode = binding.txtMode.text.toString()
+            val note = binding.txtNote.text.toString()
+            if (amt.isEmpty())
+            {
+                Toast.makeText(this, "Please Enter Your Amount Name ", Toast.LENGTH_SHORT).show()
+            }
+
+            else if (category.isEmpty())
+            {
+
+                Toast.makeText(this, "Please Enter Your Category Name ", Toast.LENGTH_SHORT).show()
+            }
+
+
+            else if (date.isEmpty())
+            {
+
+                Toast.makeText(this, "Please Enter Your Date Name ", Toast.LENGTH_SHORT).show()
+            }
+
+
+            else if (mode.isEmpty())
+            {
+
+                Toast.makeText(this, "Please Enter Your Mode Name ", Toast.LENGTH_SHORT).show()
+            }
+
+
+            else if (note.isEmpty())
+            {
+
+                Toast.makeText(this, "Please Enter note Mode Name ", Toast.LENGTH_SHORT).show()
+            }
+
+
+            else
+            {
+                database.InsertTableData(amt ,category,date, mode,note)
+                Toast.makeText(this, "Your Data Add SuccesFully", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+
+//        binding.SpinnerCategory.onItemSelectedListener = object :
+//            AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(
+//                parent: AdapterView<*>,
+//                view: View,
+//                position: Int,
+//                id: Long
+//            ) {
+//                val selectedItem = parent.getItemAtPosition(position).toString()
+//                if (selectedItem == "Add new category") {
 //
-//        var adapter = CatAdapter(this, Categorylist)
-//        SpinnerCategory.adapter = adapter
+//                }
+//            }
+//
+//            override fun onNothingSelected(p0: AdapterView<*>?) {
+//            }
+//        }
+
+
 
 
     }
 
 
-    private fun updateLabal(myCalendar: Calendar) {
 
-
+    fun updateLabal(myCalendar: Calendar) {
         val myFormat = "dd-MM-yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.UK)
         binding.txtDate.setText(sdf.format(myCalendar.time))
-
     }
-
-
 }
 

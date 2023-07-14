@@ -18,7 +18,7 @@ class CategoryActivity : AppCompatActivity() {
 
     private fun initview() {
 
-        var database = DatabaseHelper(this,"CategoryTable.db",null,1)
+        var database = DatabaseHelper(this,"Database.db",null,1)
         binding.btnApply.setOnClickListener {
             val name = binding.edtCategoryName.text.toString()
             if (name.isEmpty())

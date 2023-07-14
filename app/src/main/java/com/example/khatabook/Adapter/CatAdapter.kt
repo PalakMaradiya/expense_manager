@@ -1,5 +1,6 @@
 package com.example.khatabook.Adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import com.example.khatabook.Activity.IncomeActivity
 import com.example.khatabook.Modal.ModalClass
 import com.example.khatabook.R
 
-class CatAdapter(var incomeActivity: IncomeActivity, var Categorylist: ArrayList<ModalClass>) :
+class CatAdapter(var incomeActivity: Context, var Categorylist: ArrayList<ModalClass>) :
     BaseAdapter() {
     override fun getCount(): Int {
         return Categorylist.size
@@ -31,7 +32,7 @@ class CatAdapter(var incomeActivity: IncomeActivity, var Categorylist: ArrayList
 
         val v: View = LayoutInflater.from(incomeActivity).inflate(R.layout.item_file_, null)
         val Category  = v.findViewById<TextView>(R.id.txtCategories)
-        Category.text.get(p0)
+        Category.text=Categorylist[p0].Category
         return v
 
 
